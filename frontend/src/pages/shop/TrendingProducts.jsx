@@ -14,7 +14,19 @@ const TrendingProducts = () => {
         <p className='section__subheader mb-12'>Discover the Hottest Picks: Elevate Your Style With Our Curated Collection Of Trending Jewellery Fashion Product.</p>
 
         {/* products card */}
-        <ProductCards products={products }/>
+        <div className='mt-12'>
+            <ProductCards products={products.slice(0,visibleProducts)}/>
+        </div>
+
+        {/* Load More Products Button */}
+        <div className='product__btn'>
+            {
+                visibleProducts < products.length && (
+                    <button className='btn' onClick={loadMoreProducts}>Load More</button>
+                )
+            }
+        </div>
+
     </section>
   )
 }
