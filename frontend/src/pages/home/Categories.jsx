@@ -19,7 +19,7 @@ const Categories = () => {
         <>
             <div className='product__grid'>
                 {categories.map((category, ) => (
-                    <Link to={`/categories/${category.path}`} className='categories__card'>
+                    <Link key={category.name } to={`/categories/${category.path}`} className='categories__card'>
                         <img src={category.Image} alt={category.name} />
                         <h4>{category.name}</h4>
                     </Link>
