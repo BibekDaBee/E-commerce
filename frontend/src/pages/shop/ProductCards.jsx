@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import RatingStars from '../../components/RatingStars';
 
 const ProductCards = ({ products = [] }) => {
-    console.log(products);
+    // console.log(products);
 
     if (products.length === 0) {
         return <p>No products available</p>;
