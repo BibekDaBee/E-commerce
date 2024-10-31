@@ -47,6 +47,12 @@ const SingleProduct = () => {
             </div>
         </div>
     </section> 
+
+    {/* display review */}
+    {/* TODO: work with review when will have API */}
+    <section className='section__container mt-8'>
+        Review Here
+    </section>
     </>
   )
 }
