@@ -1,11 +1,17 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import {useSelector} from 'react-redux'
+import CartModal from '../pages/shop/CartModal';
 
 export const Navbar = () => {
     const products = useSelector((state) =>  state.cart.products);
-    console.log(products);
+    //  console.log(products);
+
+    const [isCartOpen,setIsCartOpen] = useState(false);
+    const handleCartToggle = () => {
+        setIsCartOpen(!isCartOpen)
+    }
 
   return (
     <header className='fixed-navbar w-nav'>
@@ -31,9 +37,9 @@ export const Navbar = () => {
                 </span>
 
                 <span>
-                    <button className='hover:text-primary'>
+                    <button onClick={handleCartToggle} className='hover:text-primary'>
                         <i className="ri-shopping-bag-line"></i>
-                        <sup className='text-sm inline-block px-1.5 text-white rounded-full bg-primary text-center'>0</sup>
+                        <sup className='text-sm inline-block px-1.5 text-white rounded-full bg-primary text-center'>{products.length}</sup>
                     </button>
                 </span>
 
@@ -45,6 +51,11 @@ export const Navbar = () => {
 
             </div>
         </nav>
+
+        {
+            isCartOpen && <CartModal products={products} isOpen={isCartOpen} onClose={handleCartToggle}/>
+        }
+
     </header>
   )
 }
