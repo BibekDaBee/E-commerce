@@ -1,8 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 import { Link } from 'react-router-dom';
+import {useSelector} from 'react-redux'
 
 export const Navbar = () => {
+    const products = useSelector((state) =>  state.cart.products);
+    console.log(products);
+
   return (
     <header className='fixed-navbar w-nav'>
         <nav className='max-w-screen-2xl mx-auto px-4 flex justify-between items-center'>
