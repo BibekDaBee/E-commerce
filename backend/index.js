@@ -21,6 +21,11 @@ app.use(cors({
     credentials: true
 }))
 
+// All routes
+const authRoutes = require('./src/users/user.route');
+
+app.use('/api/auth', authRoutes)
+
 
 main().then(() => console.log("Mongobd is successfully connected")).catch(err => console.log(err));
 
