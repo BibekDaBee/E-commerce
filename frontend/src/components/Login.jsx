@@ -1,19 +1,37 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom'
+import { useLoginUserMutation } from '../redux/features/cart/auth/authApi';
 
 const Login = () => {
     const [message, setMessage] = useState('')
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const dispatch = useDispatch();
+    const [loginUser, {isLoading: loginLoading}] = useLoginUserMutation()
+    // console.log(loginUser)
+
+    const navigate = useNavigate();
+
+    // Handel Logon
     const handleLogin = async(e) => {
         e.preventDefault();
         const data = {
             email,
             password
         }
-
         // console.log(data);
+
+        try {
+            const response = await loginUser(data).unwrap();
+            // console.log(response)
+            alert("Login Successful");
+            navigate("/")
+        } catch (error) {
+            setMessage("Please enter correct credentials")
+        }
     }
 
   return (
