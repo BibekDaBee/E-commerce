@@ -32,7 +32,7 @@ const productsApi = createApi({
     }),
 
     //Get Single Product (fetch by ID)
-    fetchProductById: (builder) => ({
+    fetchProductById: builder.query({
       query: (id) => `/${id}`,
       providesTags: (result, error, id) => [{ type: "Products", id }],
     }),
