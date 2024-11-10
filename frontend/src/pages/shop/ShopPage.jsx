@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import productsData from '../../data/products.json'
 import ProductCards from './ProductCards';
 import ShopFiltering from './ShopFiltering';
+import { useFetchAllProductsQuery } from '../../redux/features/products/productsAPI';
 
 const filters = {
     categories: ['all', 'accessories', 'dress', 'jewellery', 'cosmetics'],
@@ -16,39 +17,26 @@ const filters = {
 } 
 
 const ShopPage = () => {
-    const [products, setProducts] = useState(productsData);
     const [filtersState, setFiltersState] = useState({
         category: 'all',
         color: 'all',
         priceRange: ''
     });
 
-    // filtering function
-    const applyFilters = () => {
-        let filteredProducts = productsData;
+     const [currentPage, setcurrentPage] = useState(1);
+     const [ProductsPerPage] = useState(8);
 
-        //filter by categories
-        if(filtersState.category && filtersState.category !== 'all'){
-            filteredProducts = filteredProducts.filter(product => product.category === filtersState.category)
-        }
+     const {category, color, priceRange} = filtersState;
+     const [minPrice, maxPrice] = priceRange.split('-').map(Number);
 
-        //filter by colors
-        if(filtersState.color && filtersState.color !== 'all'){
-            filteredProducts = filteredProducts.filter(product => product.color ===filtersState.color)
-        }
-
-        //filter by price range
-        if(filtersState.priceRange){
-            const [minPrice, maxPrice] =filtersState.priceRange.split("-").map(Number);
-            filteredProducts = filteredProducts.filter(product => product.price >= minPrice && product.price <=maxPrice)
-        }
-
-        setProducts(filteredProducts)
-    }
-
-    useEffect(() =>{
-        applyFilters()
-    }, [filtersState])
+     const {data:{products = [], totalPages, totalProducts} = {}, error, isLoading} = useFetchAllProductsQuery({
+        category: category !== 'all' ? category : '',
+        color: color !== 'all' ? color : '',
+        minPrice: isNaN(minPrice) ? '' : minPrice,
+        maxPrice: isNaN(maxPrice) ? '' : maxPrice,
+        page: currentPage,
+        limit: ProductsPerPage,
+     })
 
 
     // clear fliter
@@ -60,6 +48,9 @@ const ShopPage = () => {
         })
     }
     
+   if(isLoading) return <div>...Loading</div>
+   if(error) return <div>Error loading products: {error.message}</div>
+
   return (
     <>
     <section className='section__container bg-primary-light'>
