@@ -6,14 +6,14 @@ import { removeFromCart, updateQuantity } from "../../redux/features/cart/cartSl
 const CartModal = ({ products, isOpen, onClose }) => {
   const dispatch = useDispatch();
 
-  const handleQuantity = (type, id) => {
-    const payload = {type,id}
+  const handleQuantity = (type, _id) => {
+    const payload = {type,_id}
     dispatch(updateQuantity(payload))
   }
 
-  const handleRemove = (e,id) => {
+  const handleRemove = (e,_id) => {
     e.preventDefault()
-    dispatch(removeFromCart({id}))
+    dispatch(removeFromCart({_id}))
   }
 
   return (
@@ -70,7 +70,7 @@ const CartModal = ({ products, isOpen, onClose }) => {
 
                     <div className="flex flex-row md:justify-start justify-end items-center mt-2">
                       <button
-                        onClick={() => handleQuantity('decrement', item.id)}
+                        onClick={() => handleQuantity('decrement', item._id)}
                         className="size-6 flex items-center 
                         justify-center px-1.5 rounded-full 
                         bg-gray-200 text-gray-700 hover:bg-primary hover:text-white ml-8"
@@ -81,7 +81,7 @@ const CartModal = ({ products, isOpen, onClose }) => {
                         {item.quantity}
                       </span>
                       <button
-                        onClick={() => handleQuantity('increment', item.id)}
+                        onClick={() => handleQuantity('increment', item._id)}
                         className="size-6 flex items-center 
                         justify-center px-1.5 rounded-full 
                         bg-gray-200 text-gray-700 hover:bg-primary hover:text-white"
@@ -90,7 +90,7 @@ const CartModal = ({ products, isOpen, onClose }) => {
                       </button>
 
                       <div className="ml-5">
-                        <button onClick={(e) => handleRemove(e, item.id)} 
+                        <button onClick={(e) => handleRemove(e, item._id)} 
                         className="text-red-500 hover:text-red-800 mr-4">Remove</button>
                       </div>
 
