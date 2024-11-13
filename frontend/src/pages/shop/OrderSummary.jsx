@@ -1,17 +1,55 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearCart } from '../../redux/features/cart/cartSlice';
+import {loadStripe} from '@stripe/stripe-js';
+import { getBaseURL } from '../../utils/baseURL';
 
 const OrderSummary = () => {
 
     const dispatch = useDispatch();
+
+    const {user} = useSelector(state => state.auth);
+    // console.log(user)
 
     const handleClearCart = () => {
         dispatch(clearCart())
     }
 
     const products = useSelector((store) => store.cart.products);
+    // console.log(products)
     const {tax, taxRate, totalPrice, grandTotal, selectedItems} = useSelector((store) => store.cart)
+
+
+    // Payment integration
+    const makePayment = async (e) => {
+        const stripe = await  loadStripe(import.meta.env.VITE_STRIPE_PK)
+        // console.log(stripe)
+        const body = {
+            products: products,
+            userID: user?._id
+        }
+        const headers = {
+            "Content-Type": "application/json"
+        }
+
+        const response = await fetch(`${getBaseURL()}/api/orders/create-checkout-session`, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(body)
+        })
+        
+        const session = await response.json();
+        console.log("session: ", session)
+
+        const result = stripe.redirectToCheckout({
+            sessionId: session.id
+        })
+        console.log("Result: ", result)
+        if(result.error) {
+            console.log("Error: ", result.error)
+        }
+    };
+
 
   return (
     <div className='bg-primary-light mt-5 rounded text-base'>
@@ -34,6 +72,10 @@ const OrderSummary = () => {
                     <i className="ri-delete-bin-7-line"></i>
                 </button>
                 <button 
+                    onClick={(e) =>{
+                        e.stopPropagation();
+                        makePayment();
+                    }}
                     className='bg-green-500 px-3 py-1.5 text-white mt-2 rounded-md
                     flex justify-center items-center mb-4'>
                     <span className='mr-2'>Proceed To Checkout</span>
