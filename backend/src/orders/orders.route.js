@@ -1,5 +1,7 @@
 const express = require("express");
 const Order = require("./orders.model");
+const verifyToken = require("../middleware/verifyToken");
+const verifyAdmin = require("../middleware/verifyAdmin");
 const router = express.Router();
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -80,6 +82,105 @@ router.post("/confirm-payment", async (req, res) => {
     } catch (error) {
         console.error("Error confirming payment", error)
         res.status(500).send({message:"Failed to confirm payment"}) 
+    }
+})
+
+// Get Order by email address
+router.get("/:email", async (req,res) => {
+    const email= req.params.email;
+    if(!email){
+        return res.status(400).send({message:"Email is required"});
+    }
+    try {
+        const orders = await Order.find({email: email});
+        if(orders.length == 0 || ! orders){
+            return res.status(404).send({order:0, message:"No order found for this email"});
+        }
+
+        res.status(200).send({orders});
+
+    } catch (error) {
+        console.error("Error fetching order by email", error);
+        res.status(500).send({message:"Failed to fetch order by email"})
+    }
+})
+
+// Get Orders by id
+router.get("/order/:id", async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id);
+        if(!order){
+            return res.status(404).send({message: 'Order not found'})
+        }
+        res.status(200).send(order);
+        
+    } catch (error) {
+        console.error("Error fetching order by order id", error);
+        res.status(500).send({message:"Failed to fetch order by order id"})
+    }
+})
+
+// Get all Orders
+// router.get("/", verifyToken, verifyAdmin, async (req,res) => {
+router.get("/", async (req,res) => {
+    try {
+        const orders = await Order.find().sort({createdAt:-1});
+        if(orders.length === 0) {
+            return res.status(404).send({message:"No order found", orders: []})
+        }
+        res.status(200).send(orders);
+
+    } catch (error) {
+        console.error("Error fetching all orders", error);
+        res.status(500).send({message:"Failed to fetch all orders"})
+    }
+})
+
+// Update order status
+router.patch("/update-order-status/:id", async (req, res) => {
+    const {id} = req.params;
+    const {status} = req.body;
+    if(!status) {
+        return res.status(400).send({message: "Status is required"});
+    }
+    try {
+        const updatedOrder = await Order.findByIdAndUpdate(id, {
+            status,
+            updatedAt: new Date()
+        },{
+            new: true, runValidators: true
+        });
+
+        if(!updatedOrder) {
+            return res.status(404).send({message: "Order not found"})
+        }
+
+        res.status(200).json(
+            {message:"Order staus updated successfully",
+                order: updatedOrder
+            }
+        )
+    } catch (error) {
+        console.error("Error updating order status", error);
+        res.status(500).send({message:"Failed to update order status"})
+    }
+});
+
+// Delete Order
+router.delete("/delete-order/:id", async (req, res) => {
+    const {id} = req.params;
+    try {
+        const deletedOrder = await Order.findByIdAndDelete(id);
+        if(!deletedOrder) {
+            return res.status(404).send({message:"Order not found"})
+        }
+        res.status(200).json({
+            message:"Order deleted successfully",
+            order: deletedOrder
+    })
+    } catch (error) {
+        console.error("Error deleting order status", error);
+        res.status(500).send({message:"Failed to delete order status"})
     }
 })
 
