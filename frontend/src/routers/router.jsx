@@ -8,6 +8,7 @@ import SingleProduct from "../pages/shop/productDetails/SingleProduct";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import PaymentSuccess from "../components/PaymentSuccess";
+import DashboardLayout from "../pages/dashboard/DashboardLayout";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +36,28 @@ const router = createBrowserRouter([
     {
       path: "/register",
       element: <Register/>
+    },
+
+    //dashboard routes
+    {
+      path:'/dashboard',
+      element:<DashboardLayout/>, // TODO: use private routes here
+      children: [
+          //user route
+          {path: '', element: <div>User Dashboard</div>},
+          {path: 'orders', element: <div>User Order</div>},
+          {path: 'payments', element: <div>User payments</div>},
+          {path: 'profile', element: <div>User profile</div>},
+          {path: 'reviews', element: <div>User reviews</div>},
+
+          //admin route (only accessible by admin) TODO: Include private routes with roles field
+          {path:"admin", element: <div>Admin main</div>},
+          {path:"add-new-post", element: <div>New Post</div>},
+          {path:"manage-products", element: <div>Manage Post</div>},
+          {path:"update-product/:id", element: <div>Update Post</div>},
+          {path:"users", element: <div>All Users</div>},
+          {path:"manage-orders", element: <div>Manage Orders</div>},
+      ]
     }
   ]);
 
