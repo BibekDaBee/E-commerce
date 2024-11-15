@@ -9,6 +9,7 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import PaymentSuccess from "../components/PaymentSuccess";
 import DashboardLayout from "../pages/dashboard/DashboardLayout";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
     //dashboard routes
     {
       path:'/dashboard',
-      element:<DashboardLayout/>, // TODO: use private routes here
+      element:<PrivateRoute><DashboardLayout/></PrivateRoute>, // TODO: use private routes here
       children: [
           //user route
           {path: '', element: <div>User Dashboard</div>},
@@ -51,12 +52,30 @@ const router = createBrowserRouter([
           {path: 'reviews', element: <div>User reviews</div>},
 
           //admin route (only accessible by admin) TODO: Include private routes with roles field
-          {path:"admin", element: <div>Admin main</div>},
-          {path:"add-new-post", element: <div>New Post</div>},
-          {path:"manage-products", element: <div>Manage Post</div>},
-          {path:"update-product/:id", element: <div>Update Post</div>},
-          {path:"users", element: <div>All Users</div>},
-          {path:"manage-orders", element: <div>Manage Orders</div>},
+          {
+            path:"admin",
+            element: <PrivateRoute role="admin"><div>Admin main</div></PrivateRoute>
+          },
+          {
+            path:"add-new-post", 
+            element: <PrivateRoute role="admin"><div>New Post</div></PrivateRoute>
+          },
+          {
+            path:"manage-products", 
+            element: <PrivateRoute role="admin"><div>Manage Post</div></PrivateRoute>
+          },
+          {
+            path:"update-product/:id", 
+            element: <PrivateRoute role="admin"><div>Update Post</div></PrivateRoute>
+          },
+          {
+            path:"users", 
+            element:<PrivateRoute role="admin"><div>All Users</div></PrivateRoute>
+          },
+          {
+            path:"manage-orders", 
+            element: <PrivateRoute role="admin"><div>Manage Orders</div></PrivateRoute>
+          },
       ]
     }
   ]);
