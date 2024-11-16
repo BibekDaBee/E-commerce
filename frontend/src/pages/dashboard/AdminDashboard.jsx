@@ -1,17 +1,18 @@
 import React from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { useLogoutUserMutation } from '../../redux/features/auth/authApi'
-import { useDispatch } from 'react-redux'
-import { logout } from '../../redux/features/auth/authSlice'
+import { useLogoutUserMutation } from '../../redux/features/auth/authApi';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/features/auth/authSlice';
+
 const navItems = [
-    {path: '/dashboard', label: 'Dashboard'},
-    {path: '/dashboard/orders', label: 'Orders'},
-    {path: '/dashboard/payments', label: 'Payments'},
-    {path: '/dashboard/profile', label: 'Profile'},
-    {path: '/dashboard/reviews', label: 'Reviews'},
+    {path: '/dashboard/admin', label: 'Dashboard'},
+    {path: '/dashboard/add-new-post', label: 'Add New Product'},
+    {path: '/dashboard/manage-products', label: 'Manage Products'},
+    {path: '/dashboard/users', label: 'Users'},
+    {path: '/dashboard/manage-orders', label: 'Manage Orders'},
 ]
 
-const UserDashboard = () => {
+const AdminDashboard = () => {
     const [logoutUser] = useLogoutUserMutation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ const UserDashboard = () => {
     <div className='space-y-5 bg-white p-8 md:h-screen flex flex-col justify-between'>
         <div>
             <div className='nav__logo'>
-                <Link to='/'>Ecommerce<span>.</span></Link>
+                <Link to="/">Ecommerce<span>.</span></Link>
                 <p className='text-sx italic'>User Dashboard</p>
             </div>
             <hr className='mt-t'/>
@@ -61,4 +62,4 @@ const UserDashboard = () => {
   )
 }
 
-export default UserDashboard
+export default AdminDashboard
