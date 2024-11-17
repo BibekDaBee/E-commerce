@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { useGetUserStatsQuery } from '../../../../redux/features/stats/statsApi';
 import {Bar} from 'react-chartjs-2'
 import {Chart as Chartjs, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend} from 'chart.js'
+import UserStats from './UserStats';
 
 Chartjs.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -60,8 +61,8 @@ const UserDMain = () => {
             <h1 className='text-2xl font-semibold mb-4'>User Dashboard</h1>
             <p className='text-gray-500'>Hi, {user?.username}! Welcome to your user Dashboard</p>
         </div>
-        <div>User Stats</div>
-        <div>
+            <UserStats stats = {stats}/>
+        <div className='mb-6'>
             <Bar data={data} options={options}/>
         </div>
     </div>
