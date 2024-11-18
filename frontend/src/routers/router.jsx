@@ -12,6 +12,7 @@ import DashboardLayout from "../pages/dashboard/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
 import UserDMain from "../pages/dashboard/user/dashboard/UserDMain";
 import UserOrders from "../pages/dashboard/user/dashboard/UserOrders";
+import OrderDetails from "../pages/dashboard/user/OrderDetails";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
           path:"/success",
           element: <PaymentSuccess/>
         },
+        {
+          path:"/orders/:orderId",
+          element: <OrderDetails/>
+        }
         
       ]
     },
