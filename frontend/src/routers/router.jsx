@@ -15,6 +15,7 @@ import UserOrders from "../pages/dashboard/user/dashboard/UserOrders";
 import OrderDetails from "../pages/dashboard/user/OrderDetails";
 import UserPayments from "../pages/dashboard/user/UserPayments";
 import UserReviews from "../pages/dashboard/user/UserReviews";
+import UserProfile from "../pages/dashboard/user/UserProfile";
 
 const router = createBrowserRouter([
     {
@@ -57,7 +58,7 @@ const router = createBrowserRouter([
           {path: '', element: <UserDMain/>},
           {path: 'orders', element: <UserOrders/>},
           {path: 'payments', element: <UserPayments/>},
-          {path: 'profile', element: <div>User profile</div>},
+          {path: 'profile', element: <UserProfile/>},
           {path: 'reviews', element: <UserReviews/>},
 
           //admin route (only accessible by admin) TODO: Include private routes with roles field
