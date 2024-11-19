@@ -16,6 +16,7 @@ import OrderDetails from "../pages/dashboard/user/OrderDetails";
 import UserPayments from "../pages/dashboard/user/UserPayments";
 import UserReviews from "../pages/dashboard/user/UserReviews";
 import UserProfile from "../pages/dashboard/user/UserProfile";
+import AdminDMain from "../pages/dashboard/admin/dashboard/AdminDMain";
 
 const router = createBrowserRouter([
     {
@@ -64,7 +65,7 @@ const router = createBrowserRouter([
           //admin route (only accessible by admin) TODO: Include private routes with roles field
           {
             path:"admin",
-            element: <PrivateRoute role="admin"><div>Admin main</div></PrivateRoute>
+            element: <PrivateRoute role="admin"><AdminDMain/></PrivateRoute>
           },
           {
             path:"add-new-post", 
