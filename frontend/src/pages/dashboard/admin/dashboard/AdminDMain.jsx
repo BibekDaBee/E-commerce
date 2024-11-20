@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useGetAdminStatsQuery } from '../../../../redux/features/stats/statsApi';
 import AdminStats from './AdminStats';
+import AdminStatsChart from './AdminStatsChart';
 
 const AdminDMain = () => {
     const {user} = useSelector((state) => state.auth);
@@ -16,6 +17,7 @@ const AdminDMain = () => {
         </div>
         <p className='text-gray-500'>Hi, {user?.username}! Welcome to the admin dashboard</p>
         <AdminStats stats={stats}/>
+        <AdminStatsChart stats={stats}/>
     </div>
   )
 }
