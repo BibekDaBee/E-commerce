@@ -4,6 +4,7 @@ import TextInput from "./TextInput";
 import SelectInput from "./SelectInput";
 import UploadImage from "./UploadImage";
 
+// category
 const categories = [
   { label: "Select Category", value: "" },
   { label: "Accessories", value: "Accessories" },
@@ -12,6 +13,7 @@ const categories = [
   { label: "Cosmetics", value: "cosmetics" },
 ];
 
+//colors
 const colors = [
   { label: "Select Color", value: "" },
   { label: "Black", value: "black" },
