@@ -13,7 +13,7 @@ const categories = [
   { label: "Cosmetics", value: "cosmetics" },
 ];
 
-//colors
+
 const colors = [
   { label: "Select Color", value: "" },
   { label: "Black", value: "black" },
