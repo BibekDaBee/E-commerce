@@ -21,6 +21,9 @@ app.use(cors({
     credentials: true
 }))
 
+//image Upload
+const uploadImage = require("./src/utils/uploadImage")
+
 // All routes
 const authRoutes = require('./src/users/user.route');
 const productRoutes = require('./src/products/products.route');
@@ -46,8 +49,24 @@ async function main() {
   }
 
   app.post("/uploadImage", (req, res) => {
-    
-  })
+    const { image } = req.body;
+
+    if (!image) {
+        console.error("No image provided in request.");
+        return res.status(400).send({ message: "Image is required" });
+    }
+
+    uploadImage(image)
+        .then((url) => {
+            console.log("Image uploaded successfully:", url);
+            res.send({ url });
+        })
+        .catch((err) => {
+            console.error("Error uploading image to Cloudinary:", err);
+            res.status(500).send({ message: "Image upload failed", error: err.message });
+        });
+});
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
