@@ -26,8 +26,8 @@ const UploadImage = ({name, setImage}) => {
         setLoading(true);
         axios.post(`${getBaseURL()}/uploadImage`, {image: base64})
         .then((res) => {
-            const imageUrl = res.data;
-            // console.log("Image URL:", imageUrl);
+            const imageUrl = res.data.url;
+            // console.log("Image URL from server:", imageUrl);
             setUrl(imageUrl);
             alert("Image Uploaded successfully")
             setImage(imageUrl);
@@ -53,6 +53,7 @@ const UploadImage = ({name, setImage}) => {
             base64s.push(base)
         }
     }
+    // console.log("Rendering with URL:", url);
 
   return (
     <div>
@@ -65,9 +66,13 @@ const UploadImage = ({name, setImage}) => {
         }
         {
             url && (
-                <div className='mt-2 text-sm text-green-600'>
+                <div key={url} className="mt-2 text-sm text-green-600">
                     <p>Image Uploaded Successfully!</p>
-                    <img src={url} alt='Img'/>
+                    <img 
+                        src={url} 
+                        alt="Uploaded Image" 
+                        style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
+                    />
                 </div>
             )
         }
