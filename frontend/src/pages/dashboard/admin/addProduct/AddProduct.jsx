@@ -67,7 +67,7 @@ const AddProduct = () => {
         description: "",
       })
       setImage('');
-      navigate("/shop")
+      navigate("/dashboard/manage-products")
 
     } catch (error) {
       console.log("Failed to submit product",error);
