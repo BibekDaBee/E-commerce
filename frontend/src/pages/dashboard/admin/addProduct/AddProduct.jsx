@@ -57,7 +57,7 @@ const AddProduct = () => {
       alert('Please fill all required field')
     }
     try {
-      await AddProduct({...product, image, author: user?._id}).unwrap();
+      await AddProduct({...product, image, author: user?.id}).unwrap();
       alert('Prodcut added successfully');
       setProduct({
         name: "",
@@ -127,8 +127,8 @@ const AddProduct = () => {
         </div>
 
         <div>
-          <button type="submit" className="add-product-btn" disabled={isLoading} >
-          {isLoading ? "Adding Product..." : "Add Product"}
+          <button type="submit" className="add-product-btn" >
+          Add Product
           </button>
         </div>
       </form>
