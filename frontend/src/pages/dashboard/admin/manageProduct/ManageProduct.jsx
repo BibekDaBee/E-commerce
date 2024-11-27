@@ -108,7 +108,7 @@ const ManageProduct = () => {
                        <Link to={`/dashboard/update-product/${product._id}`}>Edit</Link>
                       </td>
                       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        <button className='bg-red-600 text-white px-2 py-1' onClick={() => handleDeleteProduct(product._id)}>
+                        <button className='bg-red-600 text-white px-2 py-1' onClick={() => handleDeleteProduct({ id: product._id })}>
                             Delete
                         </button>
                       </td>
