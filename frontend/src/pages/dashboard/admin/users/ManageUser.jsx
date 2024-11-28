@@ -3,8 +3,9 @@ import {
   useDeleteUserMutation,
   useGetUserQuery,
 } from "../../../../redux/features/auth/authApi";
-import { Link } from "react-router-dom";
+
 import UpdateUserModal from "./UpdateUserModal";
+import { useSelector } from "react-redux";
 
 const ManageUser = () => {
   const [isModelOpen, setIsModelOpen] = useState(false);
@@ -12,8 +13,22 @@ const ManageUser = () => {
   const { data: users = [], error, isLoading, refetch } = useGetUserQuery();
   // console.log(users)
 
+  const loggedInUser = useSelector((state) => state.auth.user);
+
+  // Helper to check if the user is the logged-in user
+  const isSelf = (userId) => loggedInUser?.id === userId;
+
+
   const [deleteUser] = useDeleteUserMutation();
   const handleDeleteUser = async (id) => {
+    if (isSelf(id)) {
+        alert("You cannot delete your own account.");
+        return;
+      }
+    const confirmDelete = window.confirm(
+        "Are you sure you want to delete this user? This action cannot be undone."
+      );
+      if (!confirmDelete) return;
     try {
       const response = await deleteUser(id).unwrap();
       alert("User deleted successfully!");
@@ -112,8 +127,11 @@ const ManageUser = () => {
                         </td>
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                           <button
-                            className="bg-red-600 text-white px-2 py-1"
-                            onClick={() => handleDeleteUser(user?._id)}
+                            className={`bg-red-600 text-white px-2 py-1 ${
+                                isSelf(user?._id) ? "cursor-not-allowed opacity-50" : ""
+                              }`}
+                              onClick={() => handleDeleteUser(user?._id)}
+                              disabled={isSelf(user?._id)}
                           >
                             Delete
                           </button>
