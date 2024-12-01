@@ -22,6 +22,10 @@ const ManageOrders = () => {
   }
 
   const handleDeleteOrder = async(orderId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this Order? This action cannot be undone."
+    );
+    if (!confirmDelete) return;
     try {
       await deleteOrder(orderId).unwrap();
       alert("Order deleted successfully");
