@@ -23,6 +23,10 @@ const ShopPage = () => {
     priceRange: "",
   });
 
+  useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
   const [currentPage, setcurrentPage] = useState(1);
   const [ProductsPerPage] = useState(8);
 
@@ -63,6 +67,8 @@ const ShopPage = () => {
 
   const startProduct = (currentPage - 1) * ProductsPerPage + 1;
   const endProduct = startProduct + products.length - 1;
+
+  
 
   return (
     <>

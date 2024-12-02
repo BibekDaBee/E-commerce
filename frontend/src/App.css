@@ -74,10 +74,21 @@ body {
 nav {
   max-width: var(--max-width-1200);
   margin: auto;
-  padding: 2rem 1rem;
+  padding: 1.1rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+/* Fixed Navbar when scrolled */
+.nav.scrolled {
+  position: fixed;
+  background-color: var(--white);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .nav__links {

@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux'
 import CartModal from '../pages/shop/CartModal';
@@ -57,15 +57,34 @@ export const Navbar = () => {
     }
    } 
 
+   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Handle scroll event
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >100) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <header className='fixed-navbar w-nav'>
+    <header className={`nav ${isScrolled ? "scrolled" : ""}`}>
         <nav className='max-w-screen-2xl mx-auto px-4 flex justify-between items-center'>
             <ul className='nav__links'>
                 <li className='link'><Link to ="/">Home</Link></li>
                 <li className='link'><Link to ="/shop">Shop</Link></li>
-                <li className='link'><Link to ="/">Pages</Link></li>
+                {/* <li className='link'><Link to ="/">Pages</Link></li> */}
                 <li className='link'><Link to ="/contact">Contact</Link></li>
+                <li className='link'><Link to ="/contact"></Link></li>
             </ul>
 
             {/*logo*/}

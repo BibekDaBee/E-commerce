@@ -22,6 +22,7 @@ import ManageProduct from "../pages/dashboard/admin/manageProduct/ManageProduct"
 import UpdateProduct from "../pages/dashboard/admin/manageProduct/UpdateProduct";
 import ManageUser from "../pages/dashboard/admin/users/ManageUser";
 import ManageOrders from "../pages/dashboard/admin/manageOrders/ManageOrders";
+import ContactMain from "../pages/contact/ContactMain";
 
 const router = createBrowserRouter([
     {
@@ -40,7 +41,8 @@ const router = createBrowserRouter([
         {
           path:"/orders/:orderId",
           element: <OrderDetails/>
-        }
+        },
+        {path:'/contact', element:<ContactMain/>}
         
       ]
     },

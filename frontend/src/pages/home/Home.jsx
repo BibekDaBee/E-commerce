@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react'
+import React, { useEffect } from 'react'
 import Banner from './Banner'
 import Categories from './Categories'
 import HeroSection from './HeroSection'
@@ -9,6 +9,10 @@ import PromoBanner from './PromoBanner'
 import Blogs from '../blogs/Blogs'
 
 const Home = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+}, []);
   return (
   <>
   <Banner/>

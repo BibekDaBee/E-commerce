@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import productsData from '../../data/products.json'
 import ProductCards from '../shop/ProductCards';
@@ -16,6 +16,11 @@ const Search = () => {
 
     setFilteredProducts(filtered);
     }
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
     <section className='section__container bg-primary-light'>
