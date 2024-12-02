@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import RatingStars from '../../../components/RatingStars';
 import { useDispatch } from 'react-redux';
@@ -9,6 +9,7 @@ import ReviewsCard from '../reviews/ReviewsCard';
 const SingleProduct = () => {
     const {id} = useParams();
     //console.log(id)
+    
 
     const dispatch = useDispatch();
     const {data, error, isloading} = useFetchProductByIdQuery(id);
@@ -17,6 +18,10 @@ const SingleProduct = () => {
     // console.log(singleProduct)
     const productReviews = data?.reviews || [];
     // console.log(productReviews)
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const handleAddToCart = (product) => {
         dispatch(addToCart(product))
@@ -43,7 +48,7 @@ const SingleProduct = () => {
         <div className='flex flex-col items-center md:flex-row gap-8'>
             {/* product image */}
             <div className='md:w-1/2 w-full'>
-                <img src={singleProduct?.image} className='rounded-md w-full h-auto'/>
+                <img src={singleProduct?.image} alt='Img' className='rounded-md w-full h-auto'/>
             </div>
 
             <div className='md:w-1/2 w-full'>

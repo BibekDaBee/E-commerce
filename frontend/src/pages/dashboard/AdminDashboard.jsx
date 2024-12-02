@@ -32,7 +32,7 @@ const AdminDashboard = () => {
         <div>
             <div className='nav__logo'>
                 <Link to="/">Ecommerce<span>.</span></Link>
-                <p className='text-sx italic'>User Dashboard</p>
+                <p className='text-sx italic'>Admin Dashboard</p>
             </div>
             <hr className='mt-t'/>
             <ul className='space-y-5 pt-10'>
