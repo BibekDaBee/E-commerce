@@ -5,8 +5,15 @@ import instaIMG3 from '../assets/instagram-3.jpg'
 import instaIMG4 from '../assets/instagram-4.jpg'
 import instaIMG5 from '../assets/instagram-5.jpg'
 import instaIMG6 from '../assets/instagram-6.jpg'
+import { useSelector } from 'react-redux'
 
 const Footer = () => {
+
+    const userRole = useSelector((state) => state.auth.user.role);
+    // console.log(userRole)
+    const trackOrderLink = userRole === "admin" ? "/dashboard/manage-orders" : "/dashboard/orders";
+
+
   return (
     <div>
         <footer className='section__container footer__container'>
@@ -29,16 +36,15 @@ const Footer = () => {
             <div className='footer__col'>
                 <h4>COMPANY</h4>
                 <a href='/'>Home</a>
-                <a href='/'>About us</a>
-                <a href='/'>Work With Us</a>
+                <a href='/about_us'>About us</a>
                 <a href='/'>Our Blogs</a>
-                <a href='/'>Terms and Conditions</a>
+                <a href='/terms_and_conditions'>Terms and Conditions</a>
             </div>
 
             <div className='footer__col'>
                 <h4>USEFUL LINKS</h4>
-                <a href='/'>Help</a>
-                <a href='/'>Track Your Order</a>
+                <a href='/contact'>Help</a>
+                <a href={trackOrderLink}>Track Your Order</a>
                 <a href='/'>Men</a>
                 <a href='/'>Women</a>
                 <a href='/'>Jewellery</a>

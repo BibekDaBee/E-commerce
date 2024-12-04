@@ -23,6 +23,8 @@ import UpdateProduct from "../pages/dashboard/admin/manageProduct/UpdateProduct"
 import ManageUser from "../pages/dashboard/admin/users/ManageUser";
 import ManageOrders from "../pages/dashboard/admin/manageOrders/ManageOrders";
 import ContactMain from "../pages/contact/ContactMain";
+import AboutsUs from "../pages/aboutAndTerms/AboutsUs";
+import TermsAndCon from "../pages/aboutAndTerms/TermsAndCon";
 
 const router = createBrowserRouter([
     {
@@ -34,6 +36,8 @@ const router = createBrowserRouter([
         {path:"/search", element:<Search/>},
         {path:"/shop", element:<ShopPage/>},
         {path:"/shop/:id", element:<SingleProduct/>},
+        {path:"/about_us", element:<AboutsUs/>},
+        {path:"/terms_and_conditions", element:<TermsAndCon/>},
         {
           path:"/success",
           element: <PaymentSuccess/>
