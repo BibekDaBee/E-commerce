@@ -55,7 +55,7 @@ const ContactMain = () => {
     }
   };
   return (
-    <section className="contact">
+    <section className="contact flex flex-col">
       <form onSubmit={onSubmit}>
         <h2>Contact form</h2>
         <div className="input-box">
@@ -91,6 +91,9 @@ const ContactMain = () => {
         <button type="submit">Send Message</button>
         {result && <p>{result}</p>}
       </form>
+      <div>
+        Please feel free to contact me. If you like my project! 
+      </div>
     </section>
   );
 };
