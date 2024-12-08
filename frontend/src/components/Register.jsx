@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterUserMutation } from '../redux/features/auth/authApi';
+import Swal from 'sweetalert2';
 
 const Register = () => {
     const [message, setMessage] = useState('')
@@ -24,6 +25,11 @@ const Register = () => {
         try {
             await registerUser(data).unwrap();
             alert("Registration Successful!")
+            Swal.fire({
+                title: "Registration Successful!",
+                text: "Please login to your account!",
+                icon: "success"
+              });
             navigate("/login")
         } catch (error) {
             setMessage("Registration failed")

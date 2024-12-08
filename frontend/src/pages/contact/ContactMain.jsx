@@ -92,7 +92,7 @@ const ContactMain = () => {
         {result && <p>{result}</p>}
       </form>
       <div>
-        Please feel free to contact me. If you like my project! 
+      If you like my project, Please feel free to contact me! 
       </div>
     </section>
   );

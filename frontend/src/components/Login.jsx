@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
 import { useLoginUserMutation } from '../redux/features/auth/authApi';
 import { setUser } from '../redux/features/auth/authSlice';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const [message, setMessage] = useState('')
@@ -30,8 +31,14 @@ const Login = () => {
            // console.log(response)
             const {token, user} = response;
             dispatch(setUser({user}));
-            alert("Login Successful");
             navigate("/")
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Welcome, you have been logged in!",
+                showConfirmButton: false,
+                timer: 1500
+              });
         } catch (error) {
             setMessage("Please enter correct credentials")
         }

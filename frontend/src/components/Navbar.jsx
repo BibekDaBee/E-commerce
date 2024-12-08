@@ -6,6 +6,7 @@ import CartModal from '../pages/shop/CartModal';
 import avatarImg from "../assets/avatar.png"
 import { useLogoutUserMutation } from '../redux/features/auth/authApi';
 import { logout } from '../redux/features/auth/authSlice';
+import Swal from 'sweetalert2';
 
 export const Navbar = () => {
     const products = useSelector((state) =>  state.cart.products);
@@ -52,6 +53,13 @@ export const Navbar = () => {
         await logoutUser().unwrap();
         dispatch(logout());
         navigate('/')
+        Swal.fire({
+            title: "Logged Out!",
+            text: "You have been looged out, Press Ok to continue!",
+            icon: "success"
+          });
+    
+
     } catch (error) {
         console.error("Failed to log out", error)
     }

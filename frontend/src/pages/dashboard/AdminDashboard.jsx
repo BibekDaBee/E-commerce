@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useLogoutUserMutation } from '../../redux/features/auth/authApi';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/features/auth/authSlice';
+import Swal from 'sweetalert2';
 
 const navItems = [
     {path: '/dashboard/admin', label: 'Dashboard'},
@@ -20,7 +21,11 @@ const AdminDashboard = () => {
     const handleLogout = async() => {
         try {
             await logoutUser().unwrap();
-            alert('logout successful');
+            Swal.fire({
+                title: "Logged Out!",
+                text: "You have been looged out, Press Ok to continue!",
+                icon: "success"
+              });
             dispatch(logout());
             navigate('/')
         } catch (error) {
