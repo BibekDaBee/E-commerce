@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 
 const Footer = () => {
 
-    const userRole = useSelector((state) => state.auth.user.role);
+    const userRole = useSelector((state) => state.auth?.user?.role);
     // console.log(userRole)
     const trackOrderLink = userRole === "admin" ? "/dashboard/manage-orders" : "/dashboard/orders";
 

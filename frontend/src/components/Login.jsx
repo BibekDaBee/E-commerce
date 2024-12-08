@@ -36,6 +36,7 @@ const Login = () => {
             setMessage("Please enter correct credentials")
         }
     }
+    if (loginLoading) return <div>Loading...</div>
 
   return (
     <section className='h-screen flex items-center justify-center'>
