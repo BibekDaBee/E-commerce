@@ -1,4 +1,4 @@
-# E-Commerce Full Stack Project:
+# E-Commerce MERN Full Stack Project:
 
 <img width="1440" alt="Screenshot 2024-12-18 at 10 25 46 pm" src="https://github.com/user-attachments/assets/0ef1ad02-1e13-4683-919d-58ac1e3d4428" />
 
