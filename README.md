@@ -2,9 +2,6 @@
 
 <img width="1440" alt="Screenshot 2024-12-18 at 10 25 46 pm" src="https://github.com/user-attachments/assets/0ef1ad02-1e13-4683-919d-58ac1e3d4428" />
 
-[Visit the frontend](https://e-com-frontend-snowy.vercel.app)
-
-
 Welcome to the E-Commerce MERN Full Stack Project! This is where MongoDB, Express, React, and Node.js join forces to create the ultimate online shopping experience. [Live Demo](https://e-com-frontend-snowy.vercel.app/)
 ## 🌟 Frontend Setup
 Follow the below steps to run the project:
